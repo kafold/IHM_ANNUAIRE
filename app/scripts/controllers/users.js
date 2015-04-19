@@ -17,7 +17,7 @@ angular.module('pooIhmExemplesApp')
 
     $http.get('http://poo-ihm-2015-rest.herokuapp.com/api/Users')
       .success(function(data) {
-        $scope.users = data.data;
+        $scope.users = data.data; //recuperation des donnees
       });
 
     if($routeParams.userId) {
