@@ -23,16 +23,8 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
       .when('/users' , {
-        templateUrl: 'views/Users/list.html',
-        controller: 'UsersCtrl'
-      })
-      .when('/users/:userId', {
-        templateUrl: 'views/Users/show.html',
+        templateUrl: '../views/Users/afficherUsers.html',
         controller: 'UsersCtrl'
       })
       .otherwise({

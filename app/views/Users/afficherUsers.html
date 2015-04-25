@@ -1,0 +1,17 @@
+<div>
+<h3>Liste des utilisateurs:</h3>
+    <table class ="Liste_des_utilisateurs" ng-hide="myVar" >
+        <tr>
+            <td>ID</td>
+            <td>Nom</td>
+            <td>Prénom</td>
+            <td>E-mail</td>
+        </tr>
+        <tr ng-repeat="user in users" >
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }} </td>
+            <td>{{user.surname}}</td>
+            <td>{{ user.email }}</td>
+        </tr>
+    </table>
+</div>
