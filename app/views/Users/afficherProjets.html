@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>Id</td>
+        <td>Année de création</td>
+        <td>Titre</td>
+        <td>Description</td>
+    </tr>
+    <tr ng-repeat="project in projects">
+        <td> {{ project.id }}</td>
+        <td>{{ project.year }}</td>
+        <td>{{ project.title }} </td>
+        <td>{{ project.description}}</td>
+    </tr>
+</table>
+</body>
+</html>
