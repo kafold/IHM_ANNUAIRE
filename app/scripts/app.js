@@ -24,11 +24,11 @@ angular
             controller: 'MainCtrl'
           })
           .when('/users' , {
-            templateUrl: '../views/Users/afficherUsers.html',
+            templateUrl: '../views/users/users.html',
             controller: 'UsersCtrl'
           })
           .when('/projets' , {
-            templateUrl: '../views/Users/afficherProjets.html',
+            templateUrl: '../views/projects/projects.html',
             controller: 'ProjetsCtrl'
           })
           .otherwise({
