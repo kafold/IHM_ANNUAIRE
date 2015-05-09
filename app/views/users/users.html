@@ -1,17 +1,97 @@
-<div>
-<h3>Liste des utilisateurs:</h3>
-    <table class ="Liste_des_utilisateurs" ng-hide="myVar" >
-        <tr>
-            <td>ID</td>
-            <td>Nom</td>
-            <td>Prénom</td>
-            <td>E-mail</td>
-        </tr>
-        <tr ng-repeat="user in users" >
-            <td>{{ user.id }}</td>
-            <td>{{ user.name }} </td>
-            <td>{{user.surname}}</td>
-            <td>{{ user.email }}</td>
-        </tr>
-    </table>
+<div ng-show="affichageUser">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Filtrer un utilisateur" ng-model="test" >
+                    </div>
+                    <button class="btn btn-default" ng-click="showORHide()"><span ng-bind="hideORShow"></span> la liste de tous les utilisateurs</button>
+                </form>
+                <ul class="nav navbar-nav">
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Options sur les utilisateurs <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a ng-click="selectChoice(1)">Modification</a></li>
+                            <li class="divider"></li>
+                            <li><a ng-click="selectChoice(2)">Suppresion</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="panel panel-info">
+        <div class="panel-heading"> La liste de tous les utilisateurs </div>
+        <div class="panel-body">
+            <p>Cette liste contient toutes les informations concernant les utilisateurs</p>
+            <p>Vous pouvez cacher/afficher le contenu de cette liste en cliquant sur le bouton ci-dessus </p>
+            <p><span>L'option choisit est <b>{{optionChoisit(selectedChoice)}}</b></span>. Cliquez sur un numéro d'<b>identifiant</b>, un <b>nom</b> ou sur un <b>prénom</b> pour appliquer l'option.</p>
+        </div>
+
+        <table class="TableUSers" ng-hide="myVar">
+            <tr>
+                <th>Indice</th>
+                <th>n° identifiant</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Adresse site web</th>
+                <th>Projets associés aux rôles</th>
+            </tr>
+
+            <tr ng-repeat="user in users | filter:test ">
+                <td>{{ $index + 1 }}</td>
+                <td> <a class="list-group-item list-group-item-success" ng-click="modifierOUsupprimer(user, index)">{{ user.id }}</a></td>
+                <td><a class="list-group-item list-group-item-success" ng-click="modifierOUsupprimer(user, index)">{{ user.name }} </a></td>
+                <td><a class="list-group-item list-group-item-success" ng-click="modifierOUsupprimer(user, index)">{{user.surname}}</a></td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.website }}</td>
+
+                <td>
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="role in Roles | filter:user.id" >
+                            <ul class="list-group">
+                                <li class="list-group-item">Role : {{ role.name }}</li>
+                                <li class="list-group-item" ng-repeat="projet in Projects | filter:role.ProjectId">  Titre du projet : {{projet.title}}</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
+
+<div ng-init="modificationclique=true" ng-show="affichageModificationUser">
+    <h3 class="Titre_all_users">Modification de l'utilisateur</h3>
+
+    <form name="reviewForm">
+        <h4>Nom</h4>
+        <fieldset class="form-group">
+            <input type="name" class="form-control" placeholder="Nom" title="NOM" ng-model="name"/>
+        </fieldset>
+        <h4>Prénom</h4>
+        <fieldset class="form-group">
+            <input type="prenom" class="form-control" placeholder="Prénom" title="Prénom" ng-model="surname"/>
+        </fieldset>
+        <h4>Email</h4>
+        <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon2">@</span>
+            <input type="email" class="form-control"  aria-describedby="sizing-addon2" placeholder="NOMPrénom@example.org" title="Email" ng-model="email"/>
+        </div>
+        <h4>Website</h4>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Website" aria-describedby="basic-addon2">
+            <span class="input-group-addon" id="basic-addon2">www.example.com</span>
+        </div>
+        <fieldset class="form-group">
+            <input type="submit" class="btn btn-primary pull-right" ng-click="modificationUser( nom, prenom, email, website)" value="Modifier l'utilisateur" />
+            <input type="submit" class="btn btn-primary pull-right" ng-click="showWindow(2)" value="Revenir sur la page précédente" />
+
+        </fieldset>
+    </form>
+</div>
+
