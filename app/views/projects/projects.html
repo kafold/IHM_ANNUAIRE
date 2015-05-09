@@ -1,23 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-<table>
-    <tr>
-        <td>Id</td>
-        <td>Année de création</td>
-        <td>Titre</td>
-        <td>Description</td>
-    </tr>
-    <tr ng-repeat="project in projects">
-        <td> {{ project.id }}</td>
-        <td>{{ project.year }}</td>
-        <td>{{ project.title }} </td>
-        <td>{{ project.description}}</td>
-    </tr>
-</table>
-</body>
-</html>
+<div ng-show="affichageProjets">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Filtrer un projet" ng-model="test" >
+                    </div>
+                    <button class="btn btn-default" ng-click="showORHide()"><span ng-bind="hideORShow"></span> la liste de tous les projets</button>
+                </form>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Options sur les projets<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a ng-click="selectChoice(1)">Modification</a></li>
+                            <li class="divider"></li>
+                            <li><a ng-click="selectChoice(2)">Suppresion</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="panel panel-info">
+        <div class="panel-heading">La liste de tous les projets</div>
+        <div class="panel-body">
+            <p>Cette liste contient toutes les informations concernant les utilisateurs</p>
+            <p>Vous pouvez cacher/afficher le contenu de cette liste en cliquant sur le bouton ci-dessus </p>
+            <p>L'option choisit est <b>{{optionChoisit(selectedChoice)}}</b>. Cliquez sur un numéro d'<b>identifiant</b> ou sur un <b>titre</b> pour appliquer l'option.</p>
+        </div>
+        <table ng-hide="myVar">
+            <tr>
+                <th>Indice</th>
+                <th>N° identifiant</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Année de création</th>
+                <th>Utilisateurs du projet</th>
+
+            </tr>
+            <tr ng-repeat="project in projects | filter:test ">
+                <td>{{ $index + 1 }}</td>
+                <td><a ng-click="modifierOUsupprimer(projet, index)" class="list-group-item list-group-item-success">{{ project.id }}</a></td>
+                <td><a ng-click="modifierOUsupprimer(projet, index)" class="list-group-item list-group-item-success">{{ project.title }}</a> </td>
+                <td>{{ project.description}}</td>
+                <td>{{ project.year }}</td>
+                <td >
+                    <ul class="list-group" ng-repeat="role in Roles | filter:project.id">
+                        <li class="list-group-item" ng-if="role != null">
+            <span ng-repeat="user in users | filter:role.UserId">
+                Nom du contributeur : {{user.name}} , {{user.surname}}<br>
+                Role du contributeur : {{role.name}}
+            </span>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+</div>
+<div ng-show="affichageModificationProjet">
+    <h3 class="Titre_all_users"  >Modification du projet</h3>
+
+    <form name="reviewForm">
+        <h4>Titre</h4>
+        <fieldset class="form-group">
+            <input type="titre" class="form-control" placeholder="Titre" title="titre" ng-model="projetToModify.title"/>
+        </fieldset>
+        <h4>Description</h4>
+        <fieldset class="form-group">
+            <input type="description" class="form-control" placeholder="Description" title="description" ng-model="projetToModify.description"/>
+        </fieldset>
+        <h4>Année de création du projet</h4>
+        <fieldset class="form-group">
+            <input type="date" class="form-control" placeholder="date" title="Email" ng-model="projetToModify.year"/>
+        </fieldset>
+        <fieldset class="form-group">
+            <input type="submit" class="btn btn-primary pull-right" ng-click="modificationProject( title, description, year)" value="Modifier le projet" />
+            <input type="submit" class="btn btn-primary pull-right" ng-click="showWindow(2)" value="Revenir sur la page précédente" />
+        </fieldset>
+    </form>
+
+</div>
+

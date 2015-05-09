@@ -1,0 +1,25 @@
+.Titre_all_projects{
+    font-size: large;
+    text-decoration: underline;
+    color : #000066;
+}
+
+.Nom_tableau_projects{
+    color : #000066;
+    font-weight: bold;
+}
+
+.Paragraphe_all_projects{
+    font-style : italic;
+}
+.Liste_des_projects, th , td  {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+}
+.Liste_des_projects tr:nth-child(odd)	{
+    background-color: #f1f1f1;
+}
+.Liste_des_projects tr:nth-child(even) {
+    background-color: #ffffff;
+}
