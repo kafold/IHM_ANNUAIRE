@@ -1,0 +1,95 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Options d'ajout<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a ng-click="selectChoice(1)">Ajouter un utilisateur</a></li>
+                        <li class="divider"></li>
+                        <li><a ng-click="selectChoice(2)">Ajouter un projet</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+
+<!-- AJOUT UN UTILISATEUR -->
+<div ng-show="affichageAjoutUser">
+    <h3 class="Titre_all_users">Création d'un utilisateur</h3>
+    <form name="reviewForm">
+        <h4>Nom</h4>
+        <fieldset class="form-group">
+            <input type="name" class="form-control" placeholder="Nom" title="Nom" ng-model="nom"/>
+        </fieldset>
+        <h4>Prénom</h4>
+        <fieldset class="form-group">
+            <input type="prenom" class="form-control" placeholder="Prénom" title="Prénom" ng-model="prenom"/>
+        </fieldset>
+        <h4>Email</h4>
+        <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon2">@</span>
+            <input type="email" class="form-control"  aria-describedby="sizing-addon2" placeholder="NOMPrénom@example.org" title="Email" ng-model="email"/>
+        </div>
+        <h4>Website</h4>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Website" aria-describedby="basic-addon2">
+            <span class="input-group-addon" id="basic-addon2">www.example.com</span>
+        </div>
+        <fieldset class="form-group">
+            <input type="submit" class="btn btn-primary pull-right" ng-click="toggleUser( nom, prenom, email, website)" value="Ajouter l'utilisateur" />
+        </fieldset>
+    </form>
+    <p><b><span class="colorWarning"> Ajout User Reussi : {{ajoutUserReussi}}</span></b></p>
+</div>
+
+<!-- AJOUT UN PROJET -->
+<div ng-show="affichageAjoutProjet">
+    <tabset justified="true">
+        <tab heading="Les Utilisateurs">
+            <form name="reviewForm">
+
+                <h4>Titre du projet</h4>
+                <fieldset class="form-group">
+                    <input type="titre" class="form-control" placeholder="Titre" title="titre" ng-model="title"/>
+                </fieldset>
+
+                <h4>Description</h4>
+                <fieldset class="form-group">
+                    <textarea type="description" class="form-control" placeholder="Ecrivez ici une petite description du projet" title="description" ng-model="description"/>
+                    </textarea>
+                </fieldset>
+
+                <h4>Année de création du projet</h4>
+                <fieldset class="form-group">
+                    <input type="year" class="form-control" placeholder="Ecrivez ici l'année de commencement du projet exemple : 2015" title="year" ng-model="year"/>
+                </fieldset>
+
+                <h4>Selection des rôles</h4>
+                <fieldset class="form-group">
+                    <select ng-model="selectedRole" class="form-control" title="Rôles" ng-options="role.name for role in roles">
+
+                    </select>
+                </fieldset>
+
+                <h4>Selection des utilisateurs qui ont contribués au projet</h4>
+                <fieldset class="form-group">
+                    <select ng-model="selectedUser" class="form-control"  title="Users" ng-options="user.name for user in users">
+                    </select>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <input type="submit" class="btn btn-primary pull-right" ng-click="toggleProjet(title, description, year)" value="Créer le projet" />
+
+                </fieldset>
+
+            </form>
+        </tab>
+    </tabset>
+    <p><b><span class="colorWarning">Ajout Projet Reussi : {{ajoutProjetReussi}}</span></b></p>
+</div>
+
+

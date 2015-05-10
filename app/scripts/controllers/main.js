@@ -7,11 +7,11 @@
  * # MainCtrl
  * Controller of the pooIhmExemplesApp
  */
-angular.module('pooIhmExemplesApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+angular.module('IHMAnnuaire')
+    .controller('MainCtrl', function ($scope) {
+      $scope.awesomeThings = [
+        'HTML5 Boilerplate',
+        'AngularJS',
+        'Karma'
+      ];
+    });
